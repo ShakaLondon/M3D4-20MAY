@@ -46,11 +46,19 @@
             width: auto;
           }
 
-          .fa-cart-plus {
-            font-size: 2em;
+          .title {
+            font-size: 2em !important;
           }
 
           section {
+            width: 75vw;
+          }
+
+          .hide {
+            display: none;
+          }
+
+          .row {
             width: 75vw;
           }
 
@@ -68,7 +76,7 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
-                    <li class="nav-item"><a class="nav-link" href="#contact"><i class="fa fa-cart-plus"></i></a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contact"><i class="fa title fa-cart-plus"></i></a></li>
                 </ul>
             </div>
         </div>
@@ -90,13 +98,13 @@
         <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
       </ol>
       <div class="container p-t-0 m-t-2">
-          <div class="row m-t-0">
+          <div class="row m-t-0 mx-auto">
               <!-- <div class=""> -->
     <section class="col-md-12 carousel-inner page-section bg-white mx-auto" id="bookStore">
       <div class="card-deck carousel-item active py-5 bg-white">
       <!-- <div class="container-fluid"> -->
         <!-- FIRST SLIDE -->
-        <div class="row">
+        <div class="row mx-auto">
           <div class="col-lg-4 col-sm-6 mb-4">
             <div class="card mb-4 shadow-sm">
               <svg
@@ -518,7 +526,7 @@
       <!-- SECOND SLIDE -->
       <div class="card-deck carousel-item py-5 bg-white">
         <!-- <div class="container-fluid"> -->
-          <div class="row">
+          <div class="row mx-auto">
             <div class="col-lg-4 col-sm-6 mb-4">
               <div class="card mb-4 shadow-sm">
                 <svg
@@ -940,7 +948,7 @@
       <!-- THIRD SLIDE -->
       <div class="card-deck carousel-item py-5 bg-white">
         <!-- <div class="container-fluid"> -->
-          <div class="row">
+          <div class="row mx-auto">
             <div class="col-lg-4 col-sm-6 mb-4">
               <div class="card mb-4 shadow-sm">
                 <svg
@@ -1362,7 +1370,7 @@
       <!-- FORTH SLIDE -->
       <div class="card-deck carousel-item py-5 bg-white">
         <!-- <div class="container-fluid"> -->
-          <div class="row">
+          <div class="row mx-auto">
             <div class="col-lg-4 col-sm-6 mb-4">
               <div class="card mb-4 shadow-sm">
                 <svg
@@ -1784,7 +1792,7 @@
       <!-- FIFTH SLIDE -->
       <div class="card-deck carousel-item py-5 bg-white">
         <!-- <div class="container-fluid"> -->
-          <div class="row">
+          <div class="row mx-auto">
             <div class="col-lg-4 col-sm-6 mb-4">
               <div class="card mb-4 shadow-sm">
                 <svg
@@ -2206,7 +2214,7 @@
       <!-- SECOND SLIDE -->
       <div class="card-deck carousel-item py-5 bg-white">
         <!-- <div class="container-fluid"> -->
-          <div class="row">
+          <div class="row mx-auto">
             <div class="col-lg-4 col-sm-6 mb-4">
               <div class="card mb-4 shadow-sm">
                 <svg
@@ -2493,6 +2501,10 @@
 
         console.log(inputImage)
 
+        let cardID = inputObj[x].asin
+
+        console.log(cardID)
+
         // let card = document.querySelector(`.${eachCard[x]}`)
 
         let imgElem = document.createElement('img')
@@ -2523,6 +2535,16 @@
 
         titleText.innerHTML = bookTitle
 
+        // CREATE SPAN FOR ID
+
+        let spanID = document.createElement('span')
+
+        spanID.classList.add('hide', 'bookID')
+
+        spanID.innerHTML = cardID
+
+        eachCard[x].appendChild(spanID)
+
         }
           //this is your data
           //you can do everything here :)
@@ -2545,7 +2567,7 @@ let groupButton = document.querySelectorAll('div.btn-group')
 for (y=0; y<groupButton.length; y++) {
   let secondButton = groupButton[y].children[1]
 
-  secondButton.innerHTML = `<i class="fa fa-heart"></i>`
+  secondButton.innerHTML = `<i class="far fa-heart"></i>`
   
 }
 
