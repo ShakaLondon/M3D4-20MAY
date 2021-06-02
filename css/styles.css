@@ -10961,6 +10961,7 @@ p {
 header.masthead {
   padding-top: 10.5rem;
   padding-bottom: 6rem;
+  height: 100vh;
   text-align: center;
   color: rgb(34, 22, 8);
   /* text-shadow: 1px 1px 2px rgb(235, 199, 42); */
