@@ -7,6 +7,18 @@ let favNum = 0
 
 let cartList = []
 
+function removeItem (ID) {
+
+  const position = cartList.indexOf(ID)
+
+  cartList.splice(position, 1)
+
+  let cartItem = document.querySelectorAll(`.ID${ID}`)
+
+  console.log(cartItem)
+
+}
+
 
 function pushToCard (input) {
 
@@ -97,6 +109,8 @@ secondButton[0].addEventListener('click', addToCart)
 }
 }
 
+
+
 function refreshCart (e) {
     // const spanHiddenID = document.querySelectorAll('span.hide')
 
@@ -158,7 +172,7 @@ function refreshCart (e) {
 
             const title = bookTitle.innerHTML
 
-            const shortTitle = title.slice(0, 50)
+            const shortTitle = title.slice(0, 40)
 
             // const img = cardBody.previousElementSibling
 
@@ -167,35 +181,47 @@ function refreshCart (e) {
               // <div class="d-flex flex-row ml-0 mr-0 align-items-center relative margin-top">
 
             let cartElement = `
+            <div class="d-flex flex-row ml-0 mr-0 align-items-center relative margin-top">
             <div class="row cartItem d-block border-top border-white"></div>
 
             <div class="col-2 d-inline-flex align-items-center justify-content-center mx-auto px-auto pl-4 imgDiv">
               
             </div> 
-            <div class="col-7 d-inline-flex ml-0 px-auto mx-auto py-auto">
+            <div class="col-6 d-inline-flex ml-0 px-auto mx-auto py-auto titleWidth">
               <span class="d-flex">
                  <p class="text-white ml-0 h7 py-2 mb-0">${shortTitle}</p>
               </span>
             </div> 
-            <form class="d-flex container-fluid my-0">
-            <div class="col-3 d-inline-flex mx-auto pr-0 justify-content-center py-0 my-0">
+            <form class="d-inline-flex container-fluid my-0 px-0">
+            <div class="col-3 d-inline-flex mx-0 pr-0 justify-content-center py-0 my-0">
             <div class="form-group my-0 py-0">
               <label for="itemnumber" class="text-center h7 text-warning">QTY</label>
-              <select class="form-control form-contol-sm" id="itemnumber">
-                <option>1</option>
+              <select class="form-control form-contol-sm ID${hiddenID}" id="itemnumber">
+                <option selected>1</option>
                 <option>2</option>
                 <option>3</option>
                 <option>4</option>
                 <option>5</option>
                 <option>6</option>
               </select>
-            <div>
-              <span>
-                <p class="text-white ml-3 h7 py-2 mx-auto mb-0 itemPrice">${price}</p>
-              </span>
+              <p class="text-white h7 mx-auto my-0 py-0 itemPrice">${price}</p>
+            </div>
+            <!-- <div class="d-flex my-0">
+                
+            </div> -->
 
           </div>
-          <form>`
+          </form>
+          <div class="col-2 d-inline-flex container-fluid ml-0 absolute px-0 deleteButton">
+            <span class"">
+                <i class="fa fa-times text-danger" onClick="removeItem('${hiddenID}')"></i>
+            </span>
+
+          </div>
+
+
+          </div>
+          `
 
         const imgClone = img.cloneNode()
 
@@ -203,7 +229,7 @@ function refreshCart (e) {
 
         imgClone.classList.remove(...imgCloneClass)
 
-        imgClone.classList.add('cartImage', `${hiddenID}`)
+        imgClone.classList.add('cartImage')
 
         console.log(imgCloneClass)
 
@@ -217,9 +243,7 @@ function refreshCart (e) {
 
           imgDiv.appendChild(imgClone)
 
-          const cartBxHead = document.querySelector('div.overlay-content')
-
-          const cartBx = cartBxHead.children[1]
+          const cartBx = document.querySelector('#cartBox')
 
           cartBx.appendChild(newCartElement)
 
@@ -253,6 +277,117 @@ function refreshCart (e) {
 
 }
 
+function changeSelected (ID) {
+  // let numID = Number(ID)
+  // console.log(numID)
+  let cartItem = document.querySelector(`.ID${ID}`)
+  console.log(cartItem)
+
+  let numItems = cartItem.querySelector('option[selected]')
+  console.log(numItems)
+
+  let p = cartItem.nextElementSibling
+  console.log(p)
+
+  let price = p.innerHTML.slice(1)
+
+  console.log(price)
+
+  let nextNum = numItems.nextElementSibling
+  console.log(nextNum)
+
+  let cartValue = nextNum.innerHTML
+
+  let itemTotal = price * cartValue
+
+  p.innerHTML = `$${itemTotal.toFixed(2)}`
+
+  const cartTotalElem = document.querySelector('#priceTotal')
+
+  let cartTotal = cartTotalElem.innerHTML
+
+  console.log(cartTotal)
+
+  const newTotal = cartTotal.slice(1)
+
+  const total = Number(newTotal) + Number(price)
+
+  console.log(total)
+
+  cartTotalElem.innerHTML = `$${total}`
+
+  numItems.removeAttribute('selected')
+  nextNum.setAttribute('selected', "")
+
+
+}
+
+function removeItem (removeID) {
+
+  console.log(removeID)
+
+  let position = cartList.indexOf(removeID)
+
+  console.log(removeID)
+
+  cartList.splice(position, 1)
+
+  console.log(cartList)
+
+  let cartBox = document.querySelector('#cartBox')
+
+  console.log(cartBox)
+
+  let deletedItem = cartBox.querySelector(`.ID${removeID}`)
+
+  console.log(deletedItem)
+
+  let formControl = deletedItem.parentElement
+
+  let form1 = formControl.parentElement
+
+  console.log(form1)
+
+  let col1 = form1.parentElement
+
+  console.log(col1)
+
+  let div1 = col1.parentElement
+
+  console.log(div1)
+
+  div1.remove()
+  
+  let cards = document.querySelectorAll('.inCart')
+
+  console.log(cards)
+
+  cards.forEach(card => {
+    const parentElem = card.parentElement
+    console.log(parentElem)
+    const div1 = parentElem.parentElement
+    
+
+    const cardBody = div1.parentElement
+
+    const span = cardBody.nextElementSibling
+
+    console.log(span)
+
+    console.log(removeID)
+
+    console.log(span.innerHTML)
+
+    if (removeID === span.innerHTML) {
+      card.classList.remove('inCart')
+    }
+  })
+
+  
+
+
+}
+
 function addToCart (e) {
     const btnGroup = e.currentTarget.parentElement
 
@@ -276,13 +411,15 @@ function addToCart (e) {
 
     let duplicatecheck = cartList.includes(bookID)
 
+    console.log(duplicatecheck)
+
     let bookIndex = cartList.indexOf(bookID)
 
-    duplicatecheck !== true ? cartList.push(bookID) : cartList.splice(bookIndex, 1) 
+    console.log(bookIndex)
 
-    duplicatecheck !== true ? e.currentTarget.classList.add('inCart') : e.currentTarget.classList.remove('inCart')
+    duplicatecheck !== true ? (cartList.push(bookID), e.currentTarget.classList.add('inCart'), refreshCart(e)): changeSelected(bookID)
 
-    refreshCart(e)
+    
 
     console.log (cartList)
 

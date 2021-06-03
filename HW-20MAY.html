@@ -109,7 +109,7 @@
 
           .cartItem {
             background-color: rgba(255, 255, 255, 0.233);
-            height: 105px;
+            height: 90px;
             width: 300px;
             position: absolute;
             z-index: 1 !important;
@@ -146,9 +146,9 @@
             position: relative;
           }
 
-          .cartBox {
+          #cartBox {
             margin-top: 46px;
-            padding-bottom: 25px;
+            padding-bottom: 0px;
           }
 
           label {
@@ -214,7 +214,22 @@
 
           form {
             z-index: 1000;
+            
           }
+
+          .titleWidth {
+            width: 155px;
+          }
+
+          .itemPrice {
+            min-width: 35px;
+          }
+
+          .deleteButton {
+            z-index: 2020;
+          }
+
+
 
           
           
@@ -261,11 +276,12 @@
           </div> -->
         <!-- </div> -->
 
-       
-        <div class="container-fluid px-0 cartBox">
+       <!-- cart template -->
+        <div class="container-fluid px-0 overlay-content" id="cartBox">
+          
+          </div> 
 
 
-          </div>
         <!-- cart item 1
 
           <div class="d-flex flex-row ml-0 mr-0 align-items-center relative margin-top">
